@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Likhon's Birthday Surprise</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #080808;
+  color: #f5d477;
+  font-family: Georgia, serif;
+  text-align: center;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+.message {
+  max-width: 600px;
+  width: 90%;
+  padding: 25px;
+  margin: 25px auto;
+  background: linear-gradient(145deg, #17130b, #29200e);
+  border: 2px solid #e9c46a;
+  border-radius: 18px;
+  box-shadow: 0 0 25px #c99a32;
+  color: #fff0c2;
+  line-height: 1.9;
+}
+
+.message h2 {
+  color: #f5d477;
+  text-shadow: 0 0 10px #c99a32;
+}
+
+h1 {
+  color: #f5d477;
+  text-shadow: 0 0 15px #c99a32;
+}
+
+input {
+  padding: 13px;
+  border: 2px solid #d5ad50;
+  border-radius: 8px;
+  background: #17130b;
+  color: white;
+  font-size: 16px;
+  margin: 12px;
+}
+
+button {
+  padding: 12px 25px;
+  background: linear-gradient(45deg, #b8860b, #ffe6a0);
+  color: #171008;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+.gift {
+  font-size: 110px;
+  cursor: pointer;
+  animation: bounce 1.2s infinite;
+}
+
+@keyframes bounce {
+  50% { transform: translateY(-15px); }
+}
+
+.photo {
+  width: 250px;
+  max-width: 90%;
+  border: 4px solid #e9c46a;
+  border-radius: 18px;
+  box-shadow: 0 0 25px #c99a32;
+}
+
+.message {
+  max-width: 600px;
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+@keyframes heartFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+.gallery {
+  max-width: 900px;
+  width: 100%;
+  margin: 25px auto;
+  padding: 20px;
+  border: 2px solid #e9c46a;
+  border-radius: 20px;
+  background: #17130b;
+  box-shadow: 0 0 25px #c99a32;
+}
+
+.gallery .photo {
+  width: 220px;
+  height: 250px;
+  object-fit: cover;
+  margin: 10px;
+  border: 3px solid #e9c46a;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #c99a32;
+  transition: transform 0.3s;
+}
+
+.gallery .photo:hover {
+  transform: scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<section id="passwordPage">
+  <h1>✨ A Special Surprise ✨</h1>
+  <p>Enter the Secret Password</p>
+
+  <input type="password" id="password"
+  placeholder="Enter Password">
+
+  <button onclick="checkPassword()">Unlock Surprise 🔐</button>
+
+  <p id="error"></p>
+</section>
+
+<section id="giftPage" class="hidden">
+  <h1>Something Special for You!</h1>
+  <p>Tap the gift to open your surprise.</p>
+
+  <div class="gift" onclick="openGift()">🎁</div>
+</section>
+
+<section id="birthdayPage" class="hidden">
+  <h1>🎉 Happy Birthday Likhon! 🎉</h1>
+
+  <img src="likhon.jpg" alt="Likhon" class="photo">
+
+  <h2>🎂 Many Happy Returns of the Day! 🎂</h2>
+<div class="gallery">
+  <h2>📸 Beautiful Memories 📸</h2>
+
+  <img src="likhon.jpg" alt="Memory 1" class="photo">
+  <img src="memory2.jpg" alt="Memory 2" class="photo">
+  <img src="memory3.jpg" alt="Memory 3" class="photo">
+
+  <p>❤️ A Few Special Memories ❤️</p>
+</div>
+   <div id="cakeArea">
+  <h2>Make a Wish! 🎂</h2>
+  <div style="font-size:100px; cursor:pointer"
+       onclick="blowCandles()">🎂</div>
+  <p>Tap the cake to blow out the candles!</p>
+</div>
+<div class="message">
+  <h2>💌 A Special Letter for You</h2>
+  <p>Dear Vaiya,</p>
+  <p>
+    Happy Birthday! I hope your special day is filled
+    with endless happiness, laughter and love.
+    You are a wonderful person, and I wish you success
+    and joy in every step of your life.
+  </p>
+  <p>
+    May all your dreams come true.
+    Keep smiling and always stay happy!
+  </p>
+  <p>With lots of love ❤️</p>
+</div>
+
+<div id="fireworks" style="font-size:35px"></div>
+
+  <p class="message">
+    May your special day be filled with happiness,
+    laughter and beautiful memories.
+    May all your dreams come true.
+    Wishing you a wonderful year ahead!
+  </p>
+
+  <button onclick="toggleMusic()" id="musicButton">
+    🎵 Play Music
+  </button>
+
+  <audio id="music" src="birthday.mp3" loop></audio>
+</section>
+
+<script>
+function checkPassword() {
+  const pass = document.getElementById("password").value;
+
+  if (pass === "Likhon2026") {
+    document.getElementById("passwordPage").classList.add("hidden");
+    document.getElementById("giftPage").classList.remove("hidden");
+  } else {
+    document.getElementById("error").innerText =
+      "Wrong password! Try again.";
+  }
+}
+
+function openGift() {
+  document.getElementById("giftPage").classList.add("hidden");
+  document.getElementById("birthdayPage").classList.remove("hidden");
+}
+
+function toggleMusic() {
+  const music = document.getElementById("music");
+  const button = document.getElementById("musicButton");
+
+  if (music.paused) {
+    music.play();
+    button.innerText = "⏸ Pause Music";
+  } else {
+    music.pause();
+    button.innerText = "🎵 Play Music";
+  }
+}
+
+function blowCandles() {
+  document.getElementById("cakeArea").innerHTML =
+    "<h2>✨ Wish Made! ✨</h2><h1>🎉🎆🎇🎆🎉</h1>";
+
+  document.getElementById("fireworks").innerHTML =F
+    "✨🎆✨🎇✨🎆✨🎇✨";
+}
+
+function createFireworks() {
+  const fireworks = document.getElementById("fireworks");
+  fireworks.innerHTML = "🎆 ✨ 🎇 ✨ 🎆";
+  fireworks.classList.add("show-fireworks");
+}
+function blowCandles() {
+  createFireworks();
+  document.getElementById("cakeArea").innerHTML =
+    "<h2>✨ Wish Made! ✨</h2><h1>🎉 Happy Birthday! 🎆</h1>";
+}
+function createHearts() {
+  const heart = document.createElement("div");
+  heart.innerHTML = "💛";
+  heart.style.position = "fixed";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.top = "-30px";
+  heart.style.fontSize = "20px";
+  heart.style.pointerEvents = "none";
+  heart.style.zIndex = "9999";
+  heart.style.animation = "heartFall 5s linear";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}
+
+setInterval(createHearts, 700);
+</script>
+
+</body>
+</html>
